@@ -1,0 +1,37 @@
+@import url(./reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap');
+
+:root {
+    /* primary */
+    /* --primary-soft-orange: hsl(35, 77%, 62%);
+    --primary-soft-red: hsl(5, 85%, 63%); */
+
+    /* neutral */
+    --neutral-almost-white: hsl(0, 0%, 98%);
+    --neutral-medium-gray: hsl(0, 0%, 41%);
+    --neutral-almost-black: hsl(0, 0%, 8%);
+
+    /* font body-copy */
+    --fs-body-copy: 18px;
+}
+
+html {
+    font-size: var(--fs-body-copy);
+}
+
+body {
+    /*  desktop: 1440x900px
+        mobile: 375x780px */
+    font-family: 'Epilogue', sans-serif;
+    min-height: 100vh;
+    
+    display: grid;
+}
+
+.submenu {
+    display: none;
+}
+
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
+  
