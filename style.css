@@ -1,15 +1,21 @@
 @import url(./reset.css);
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap');
 
+ * {
+    outline: 1px red dashed;
+}
+
 :root {
+    /* direction: rtl; */
     /* primary */
-    /* --primary-soft-orange: hsl(35, 77%, 62%);
-    --primary-soft-red: hsl(5, 85%, 63%); */
+    /* no primary colors */
 
     /* neutral */
     --neutral-almost-white: hsl(0, 0%, 98%);
     --neutral-medium-gray: hsl(0, 0%, 41%);
     --neutral-almost-black: hsl(0, 0%, 8%);
+
+    --neutral-almost-black-shadow: hsl(0, 0%, 8%, 0.5);
 
     /* font body-copy */
     --fs-body-copy: 18px;
@@ -23,15 +29,420 @@ body {
     /*  desktop: 1440x900px
         mobile: 375x780px */
     font-family: 'Epilogue', sans-serif;
-    min-height: 100vh;
     
+}
+
+.container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+    min-height: 100vh;
     display: grid;
+    grid-auto-rows: auto 1fr auto;
+    gap: 1rem;
+}
+
+.navbar {
+    padding: 1rem 0;
+
+    display:grid;
+    grid-template-columns: auto 1fr;
+}
+
+.navigation-container {
+    display: flex;
+    gap: 1rem;
+
+    list-style: none;
+    z-index: 1000;
+    /* padding-left: 3rem; */
+    padding-inline-start: min(3.5rem, 2vw);
+}
+
+/*  this is here to stop the down arrow from slipping
+        to the next line when window is resized 'narrowly'.
+        However, note that they're slightly not vertically
+        aligned to the rest */
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    /* regular color doesn't seem to have any effect */
+    content: url('./images/icon-arrow-down.svg');
+    padding-inline-start: .3rem; 
+}
+
+@media screen and (max-width:767px) {
+    .navigation-container {
+        position: fixed;
+        z-index: 100;
+        /* inset: 0 0 0 30%; */
+        /* next two lines are for rtl if active */
+        inset-inline: 30% 0;
+        inset-block: 0 0;
+        padding: min(20rem, 15vh) 2rem;
+        margin: 0;
+        flex-direction: column;
+        transform: translateX(100%);
+        /* transition: all 500ms ease-in-out; */
+        background-color: var(--neutral-almost-white);           
+    }
+}
+
+.login-navigation,
+.submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    list-style: none;
 }
 
 .submenu {
     display: none;
+    margin-top: 1rem;
 }
 
-.attribution { font-size: 11px; text-align: center; }
-.attribution a { color: hsl(228, 45%, 44%); }
-  
+.submenu-features::before {
+    position: relative;
+    padding-inline-end: .5rem;
+    top: 2px;
+}
+
+.submenu-features:nth-of-type(1)::before {
+    content: url('./images/icon-todo.svg');
+}
+.submenu-features:nth-of-type(2)::before {
+    content: url('./images/icon-calendar.svg');
+}
+.submenu-features:nth-of-type(3)::before {
+    content: url('./images/icon-reminders.svg');
+}
+.submenu-features:nth-of-type(4)::before {
+    content: url('./images/icon-planning.svg');
+}
+
+/* .navigation-container > li a,
+.login-navigation > li a,
+.submenu > li a {
+    text-decoration: none;
+    color: var(--neutral-medium-gray);
+} */
+
+/* .navigation-container > li:hover > a,
+.login-navigation > li:hover > a,
+.submenu > li:hover > a {
+    /* font-weight: 600; */
+    /* letter-spacing: .02px; */
+    /* color: var(--neutral-almost-black); 
+} */
+
+
+/* below code works */
+/* ul li:hover ul.submenu {
+    display: flex;
+} */
+
+.navigation-container li:hover .submenu {
+    display: flex;
+}
+
+.navigation-container > li:hover > a > span {
+    filter: brightness(10%);
+}
+:where(.navigation-container, .login-navigation, .submenu) li a {
+    text-decoration: none;
+    color: var(--neutral-medium-gray);
+}
+
+:where(.navigation-container, .login-navigation, .submenu) li:hover > a {
+    color: var(--neutral-almost-black);
+    /* filter: brightness(0%);  */
+}
+/* :where(.navigation-container, .login-navigation, .submenu, .arrow) li a:hover {
+    color: var(--neutral-almost-black);
+    filter: brightness(0%); 
+} */
+/* :where(.navigation-container, .login-navigation, .arrow) li:hover {
+    color: var(--neutral-almost-black);
+    filter: brightness(0%); 
+}
+ */
+
+.login-navigation {
+    /* margin-top: 2rem; */
+    margin-block-start: 2rem;
+    text-align: center;
+}
+
+.login-navigation > li:last-child > a {
+    display: inline-block;  /* this way, the border goes wide, to the containing block */
+    padding: .5rem .8rem;
+    width: 80%;
+    border-radius: 12px;
+    border: 2px solid var(--neutral-medium-gray);
+}
+
+/* .login-navigation > li:last-child > a:hover {
+    border: 2px solid var(--neutral-almost-black);
+} */
+
+.mobile-nav-toggle {
+    /* position: fixed; */
+    position: absolute;
+    /* right: 1rem; */
+    inset-inline-end: 1rem; /* trial of rtl style */
+    /* z-index: 120; */
+
+    margin-block: .75rem;
+    background-image: url('./images/icon-menu.svg');
+    background-repeat: no-repeat;
+    background-position: left;
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+    border: 0;
+    /* is the z-index: 120 above is moved into [aria-expan...] the transform on the next cannot totally be seen */
+    /* transition: transform 500ms ease-in-out; */
+}
+
+/* TO DO: a transition opacity wherein as the menu appears the X gradually appears */
+/* ALSO FIX: when menu is expanded and window resized, the dark-overlay is still there when it shouldn't */
+/* ALREADY FIXED: in JS */
+.mobile-nav-toggle[aria-expanded="true"]{
+    z-index: 120;
+    /* right: calc(1rem + 9px); */
+    /* when the transform is performed, the svg shifts position in X. I don't know the solution yet */
+    /* translate: -17px; */
+    /* transform: rotate(1turn); */
+    /* transition: opacity 1s; */
+    background-image: url('./images/icon-close-menu.svg');
+}
+
+main {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 3rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* vvvvvvvvvvvv originally from media screen 768px vvvvvvvvvvvv */
+.description {
+    /* max-width: 480px;
+    min-width: 200px; */
+    /* min-height: max(100%, 5vh); */
+    display: flex;
+    flex-direction: column;
+    /* gap: 1.5rem; */
+    gap: clamp(1.75rem, 1.0851rem + 2.1277vw, 3rem);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description h1 {
+    font-size: clamp(1.5rem, 1.2426rem + 3.0638vw, 4rem);
+    line-height: clamp(2.2rem, 1.2426rem + 3.0638vw, 4rem);
+}
+
+.description > p, a {
+    font-size: .8rem;
+}
+
+.description p {
+    width: 90%;
+    text-align: center;
+}
+
+.description a {
+    line-height: 1rem;  /* make it look more vertically centered */
+    text-decoration: none;
+    padding: .8rem 1.3rem;
+    background-color: var(--neutral-almost-black);
+    color: var(--neutral-almost-white);
+    /* this border is here so it won't jump later when hovered on */
+    border: 1px solid transparent;
+    border-radius: .7rem;
+    width: fit-content;
+}
+
+.description a:hover {
+    background-color: var(--neutral-almost-white);
+    color: var(--neutral-almost-black);
+    border: 1px solid var(--neutral-almost-black);
+}
+
+.companies {
+    margin-top: clamp(1rem, 0.2021rem + 2.5532vw, 2.5rem);
+    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* minimum gap for when viewport resize goes too small */
+    gap: .7rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.companies > img {
+    justify-self: center;
+}
+
+.companies > img:nth-of-type(1), img:nth-of-type(2) {
+    /* to size all SVGs similarly */
+    scale: .88;
+}
+
+.attribution {   
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+}
+
+.attribution a {
+    font-size: inherit;
+    color: hsl(228, 45%, 44%);
+}
+
+/* .hidden {
+    display: none;
+} */
+
+/* from news-homepage-main */
+/* .overflow-hidden {
+    is in reset.css
+} */
+.animate-on-mobile {
+    transition: transform 500ms ease-in-out;
+}
+
+.navigation-container[data-visible="true"] {
+    transform: translateX(0);
+}
+/* end of from news-homepage-main */
+
+@media screen and (min-width: 768px) {
+    .container {
+        /* width: 90%; */ /* would be nice to see this go from 90% to 75% (below) smoothly */
+        /* this is what I could do */
+        width: max(90vw, 75%);
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;  /* wish gap would start off small then max out at this value, but this works well enough */
+        justify-items: center;
+        align-items: start;
+        height: max-content;
+
+        /* on larger viewport, main occupies 66rem otherwise 100% */
+        width: min(66rem, 100%);
+        /*  vw =800px
+            container =720
+            ratio =.9
+
+            vw =1000
+            container =900
+            ratio =.9
+
+            vw =1100
+            container =990
+            ratio =.9
+
+            vw =1200
+            container =1080
+            ratio =.833
+
+            vw =1500
+            container =1350
+            ratio =.9
+
+            vw =1600
+            container =1440
+            ratio =.875
+
+            vw =1700
+            container =1440
+            ratio =.847
+
+            vw =1800
+            container =1440
+            ratio =.8
+
+            vw 1920
+            container =1440
+            ratio =.75 */
+
+            margin: 0 auto;
+    }
+
+    picture, .description {
+        max-width: 480px;
+        /* min-width: 300px; */
+    }
+
+    .description {
+        align-self: flex-end;
+        align-items: flex-start;
+    }
+
+    .description p, a {
+        font-size: .9rem;
+        width: 80%;
+        text-align: left;
+    }
+
+    .description > a {
+        padding: 1rem 1.5rem;
+    }
+
+    .navigation-container {
+        flex-direction: row;
+        align-items: center;
+        margin-block: .75rem;
+        column-gap: max(1rem, 3vw);
+    }
+
+    
+
+    .submenu {
+        background-color: var(--neutral-almost-white);
+        padding: 1rem 2rem;
+        border-radius: .8rem;
+
+        position: absolute;
+        filter: drop-shadow(0 5px 5px var(--neutral-almost-black-shadow));
+    }
+
+    .login-navigation {
+        flex-direction: row;
+        margin-top: 0;
+        margin-inline-start: auto;
+    }
+
+    .login-navigation > li:last-child > a {
+        display: initial;  /* this way, the border goes wide, to the containing block */
+    }
+
+    .mobile-nav-toggle {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 1000px) {
+
+    .description p, a {
+        font-size: 1rem;
+    }
+
+    .login-navigation {
+        column-gap: 3rem;
+    }
+}
+
+
