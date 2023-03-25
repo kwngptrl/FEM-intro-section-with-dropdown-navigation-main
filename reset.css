@@ -7,7 +7,6 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    /* outline: 1px red solid; */
 }
 
 * {
@@ -72,20 +71,21 @@ h6 {
     background-color: rgba(0, 0, 0, 50%);
 }
 
-.hidden {
-    display: none;
-}
-
 .overflow-hidden {
     position: fixed;
-    /* overflow-y: hidden; */
-    /* height: 100vh; */
-    /* padding-right: 17px; */
 }
 
-/* .px-17 {
+/* These lines were originally in the KP tutorial. Future implementation might reuse them */
+/* .overflow-hidden {
+    overflow-y: hidden;
+    height: 100vh;
     padding-right: 17px;
 } */
+
+/* the next attribute is needed IF there is a scrollbar, otherwise not needed */
+.px-17 {
+    padding-right: 17px;
+}
 
 /* from: https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html */
 .sr-only:not(:focus):not(:active) {
@@ -98,8 +98,8 @@ h6 {
     width: 1px;
 }
 
+/* reset for button */
 button {
-    /* reset for button */
     display: inline-block;
     border: none;
     padding: 0;

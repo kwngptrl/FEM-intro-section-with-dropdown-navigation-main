@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 
@@ -25,19 +24,18 @@
         <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"
           aria-label="menu"></button>
         <ul id="primary-navigation" data-visible="false" class="navigation-container ">
-          <!-- <li class="active"><a href="#">Home</a></li> -->
-          <li><a class="dropdown" href="#" role="button">Features <span class="arrow"></span></a>
-            <ul class="submenu"> <!-- there's a hidden class here -->
-              <!-- TO DO: should I also put aria-controls="X-navigation" aria-expanded="false" here? -->
-              <li class="submenu-features"><a href="#">Todo List</a></li>
-              <li class="submenu-features"><a href="#">Calendar</a></li>
-              <li class="submenu-features"><a href="#">Reminders</a></li>
-              <li class="submenu-features"><a href="#">Planning</a></li>
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">Features <span class="arrow"></span></a>
+            <ul class="dropdown-menu hidden">
+              <li class="dropdown-menu-features"><a href="#">Todo List</a></li>
+              <li class="dropdown-menu-features"><a href="#">Calendar</a></li>
+              <li class="dropdown-menu-features"><a href="#">Reminders</a></li>
+              <li class="dropdown-menu-features"><a href="#">Planning</a></li>
             </ul>
           </li>
-          <li><a class="dropdown" href="#">Company <span class="arrow"></span></a>
-            <ul class="submenu"> <!-- there's a hidden class here -->
-              <!-- TO DO: should I also put aria-controls="X-navigation" aria-expanded="false" here? -->
+          <li>
+            <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">Company <span class="arrow"></span></a>
+            <ul class="dropdown-menu hidden">
               <li><a href="#">History</a></li>
               <li><a href="#">Our Team</a></li>
               <li><a href="#">Blog</a></li>
@@ -45,30 +43,22 @@
           </li>
           <li><a href="#">Careers</a></li>
           <li><a href="#">About</a></li>
-          <div class="login-navigation">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
-          </div>
+          <li>
+            <ul class="login-navigation">
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Register</a></li>
+            </ul>
+          </li>
         </ul>
-
       </nav>
     </div>
 
     <main>
       <article class="description">
-        <h1>Make remote work</h1>
+        <h2>Make remote work</h2>
         <p>Get your team in sync, no matter your location. Streamline processes,
           create team rituals, and watch productivity soar.</p>
-        <a href="">Learn more</a>
-
-        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, autem asperiores, corrupti voluptas aperiam
-          voluptates quos ea esse quas officia unde exercitationem quod! Fuga quos, alias placeat asperiores nesciunt
-          nam eius, incidunt, velit quae quisquam provident accusamus dolore ratione nemo sint aspernatur labore esse
-          dolorem. Non esse omnis recusandae. Optio recusandae laborum doloremque ullam nihil quae velit consequuntur,
-          aperiam fugiat distinctio exercitationem rem porro, aliquid dolore quisquam perferendis ipsa ipsum accusantium
-          nostrum eius illum adipisci, ab ipsam ut. Aliquid, molestias! Maxime tempora perferendis ratione. Tempora,
-          dolore eveniet. Dolorem excepturi accusantium voluptatum harum velit. Iste nam quas iusto laudantium et culpa.
-        </p> -->
+        <a href="#">Learn more</a>
         <div class="companies">
           <img src="./images/client-databiz.svg" alt="">
           <img src="./images/client-audiophile.svg" alt="">
