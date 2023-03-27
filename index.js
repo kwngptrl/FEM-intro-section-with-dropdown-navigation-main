@@ -27,7 +27,6 @@ function compensateForScrollbar() {
 
 function removeStuff() {
     nav.setAttribute("data-visible", false);
-    navToggle.setAttribute("aria-expanded", false);
     /* this is here to prevent sudden close */
     setTimeout(function () {
         nav.classList.remove("animate-on-mobile");
@@ -36,11 +35,13 @@ function removeStuff() {
         body.classList.remove("overflow-hidden");
         html.classList.remove("overflow-hidden");
     }, 300);
+    navToggle.setAttribute("aria-expanded", false);
 }
 
 dropdown.forEach((item, index, arr) => {
     item.addEventListener('click', (e) => {
-        if (item.nextElementSibling.className == "dropdown-menu hidden") {
+        /* if (item.nextElementSibling.className == "dropdown-menu animate slideIn hidden") { */
+        if (item.nextElementSibling.classList.contains("hidden")) {
             item.nextElementSibling.classList.remove('hidden');
             item.setAttribute('aria-expanded', "true");
             /* the next code block closes the current dropdown-menu if another dropdown-menu is clicked on */
@@ -63,7 +64,6 @@ navToggle.addEventListener("click", (e) => {
     const visibility = nav.getAttribute("data-visible");
     if (visibility === "false") {
         nav.setAttribute("data-visible", true);
-        navToggle.setAttribute("aria-expanded", true);
         /* adds css transition only when button is clicked, and not from working when screen is resizing */
         nav.classList.add("animate-on-mobile");
         /* darkens the body */
@@ -71,6 +71,7 @@ navToggle.addEventListener("click", (e) => {
         compensateForScrollbar();
         body.classList.add("overflow-hidden");
         html.classList.add("overflow-hidden");
+        navToggle.setAttribute("aria-expanded", true);
     } else {
         removeStuff();
     }
