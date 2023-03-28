@@ -38,7 +38,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Solution URL here](https://github.com/kwngptrl/FEM-intro-section-with-dropdown-navigation-main)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Live site URL here](https://kwngptrl.github.io/FEM-intro-section-with-dropdown-navigation-main/)
 
 ## My process
 
