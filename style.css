@@ -1,15 +1,8 @@
-@import url(./reset.css);
+@import url('./reset.css');
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap');
 
-* {
-    outline: 1px red dashed;
-}
 
 :root {
-    /* direction: rtl; */
-    /* primary */
-    /* no primary colors */
-
     /* neutral */
     --neutral-almost-white: hsl(0, 0%, 98%);
     --neutral-medium-gray: hsl(0, 0%, 41%);
@@ -58,11 +51,9 @@ body {
 
     list-style: none;
     z-index: 1000;
-    /* padding-left: 3rem; */
     padding-inline-start: min(3.5rem, 2vw);
 }
 
-/* this is here to prevent the chevron from wrapping to another line when viewport is near 768px */
 .dropdown-toggle {
     display: flex;
     flex-wrap: nowrap;
@@ -71,7 +62,6 @@ body {
 }
 
 .arrow {
-    /* regular color doesn't seem to have any effect */
     content: url('./images/icon-arrow-down.svg');
     padding-inline-start: .3rem; 
     vertical-align: middle;
@@ -86,10 +76,8 @@ body {
 
 .dropdown-toggle[aria-expanded="true"] .arrow {
     transform: rotateX(180deg);
-    /* content: url('./images/icon-arrow-up.svg'); */
 }
 
-/* change color on hover and when selected */
 .dropdown-toggle:hover .arrow,
 .dropdown-toggle[aria-expanded="true"] .arrow {
     filter: brightness(10%);
@@ -101,19 +89,13 @@ body {
     .navigation-container {
         position: fixed;
         z-index: 100;
-        /* inset: 0 0 0 30%; */
-        /* next two lines are for rtl if active */
         inset-inline: 30% 0;
         inset-block: 0 0;
         padding: min(20rem, 15vh) 2rem;
         margin: 0;
         flex-direction: column;
-        /* if rtl is active 100% should be -100% */
         transform: translateX(100%);
-
-        /* transition: all 500ms ease-in-out; */
-        background-color: var(--neutral-almost-white);   
-        /* backdrop-filter: blur(10px); */        
+        background-color: var(--neutral-almost-white);    
     }
 }
 
@@ -129,50 +111,6 @@ body {
 .dropdown-menu {
     margin-top: 1rem;
 }
-
-/*  animation imported start FROM: https://startbootstrap.com/snippets/animated-navbar-dropdown  
-    If uncommented, lines in the 768px media query must be uncommented also, along with those in the index.html */
-
-/* @keyframes slideIn {
-  0% {
-    transform: translateY(1rem);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0rem);
-    opacity: 1;
-  }
-
-  0% {
-    transform: translateY(1rem);
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes slideIn {
-  0% {
-    -webkit-transform: transform;
-    -webkit-opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0);
-    -webkit-opacity: 1;
-  }
-
-  0% {
-    -webkit-transform: translateY(1rem);
-    -webkit-opacity: 0;
-  }
-}
-
-.slideIn {
-  -webkit-animation-name: slideIn;
-  animation-name: slideIn;
-} */
-
-/* animation imported end   */
 
 .dropdown-menu-features::before {
     position: relative;
@@ -193,7 +131,6 @@ body {
     content: url('./images/icon-planning.svg');
 }
 
-/* hmm, dropdown-menu is not included here, but the underline disappears anyway */
 :where(.navigation-container, .login-navigation) li a {
     text-decoration: none;
     color: var(--neutral-medium-gray);
@@ -201,7 +138,6 @@ body {
     
 }
 
-/* FIXED: if dropdown is shown, features or company should remain bold even on mouseout (same as dropdown-toggle above)   */
 :where(.navigation-container, .login-navigation) li:hover > a {
     color: var(--neutral-almost-black);
 }
@@ -213,7 +149,7 @@ body {
 }
 
 .login-navigation > li:last-child > a {
-    display: inline-block;  /* this way, the border goes wide, to the containing block */
+    display: inline-block;
     padding: .5rem .8rem;
     width: 80%;
     border-radius: 12px;
@@ -221,10 +157,8 @@ body {
 }
 
 .mobile-nav-toggle {
-    /* position: fixed; */
     position: absolute;
-    /* right: 1rem; */
-    inset-inline-end: 1rem; /* for trial of rtl style */
+    inset-inline-end: 1rem;
     z-index: 1;
 
     margin-block: .75rem;
@@ -234,18 +168,9 @@ body {
     width: 1.5rem;
     aspect-ratio: 1 / 1;
     border: 0;
-    /* the z-index: 120 above is moved into [aria-expan...] the transform on the next line cannot totally be seen */
-    /* transition: transform 500ms ease-in-out; */
 }
 
-/* DONE: a transition opacity wherein as the menu appears the X gradually appears */
-/* FIXED in JS: when menu is expanded and window resized, the dark-overlay is still there when it shouldn't */
 .mobile-nav-toggle[aria-expanded="true"]{
-    /* SOLVED: when the transform is performed, the svg shifts position in X. I don't know the solution yet */
-    /* the next attribute should be active IF there is a scrollbar, otherwise should be inactive */
-    /* translate: -17px; */
-    /* transform: rotate(1turn); */
-    /* transition: opacity 1s; */
     background-image: url('./images/icon-close-menu.svg');
     z-index: 120;
     transition: background-image 1s ease, z-index 1s;   
@@ -286,12 +211,11 @@ main {
 }
 
 .description a {
-    line-height: 1rem;  /* make it look more vertically centered */
+    line-height: 1rem;
     text-decoration: none;
     padding: .8rem 1.3rem;
     background-color: var(--neutral-almost-black);
     color: var(--neutral-almost-white);
-    /* this border is here so it won't jump later when hovered on */
     border: 1px solid transparent;
     border-radius: .7rem;
     width: fit-content;
@@ -310,7 +234,6 @@ main {
     
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* minimum gap for when viewport resize goes too small */
     gap: .7rem;
     align-items: center;
     justify-content: space-between;
@@ -321,7 +244,6 @@ main {
 }
 
 .companies > img:nth-of-type(1), img:nth-of-type(2) {
-    /* to size all SVGs similarly */
     transform: scale(.88);
 }
 
@@ -338,7 +260,6 @@ main {
 
 .hidden {
     display: none;
-    /* opacity: 0; */ /* not working so far */
 }
 
 /* from news-homepage-main */
@@ -354,63 +275,24 @@ main {
 
 @media screen and (min-width: 768px) {
     .container {
-        /* width: 90%; */ /* would be nice to see this go from 90% to 75% (below) smoothly */
-        /* this is what I could do */
         width: max(90vw, 75%);
     }
-
-    /* animate dropdown-menu only in desktop mode */
-    /* .animate {
-        animation-duration: 0.3s;
-        -webkit-animation-duration: 0.3s;
-        animation-fill-mode: both;
-        -webkit-animation-fill-mode: both;
-    } */
 
     main {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3rem;  /* wish gap would start off small then max out at this value, but this works well enough */
+        gap: 3rem;
         justify-items: center;
         align-items: start;
         height: max-content;
 
-        /* on larger viewport, main occupies 66rem otherwise 100% */
         width: min(66rem, 100%);
-        /*  vw =800px, container =720
-            ratio =.9
-
-            vw =1000, container =900
-            ratio =.9
-
-            vw =1100, container =990
-            ratio =.9
-
-            vw =1200, container =1080
-            ratio =.833
-
-            vw =1500, container =1350
-            ratio =.9
-
-            vw =1600, container =1440
-            ratio =.875
-
-            vw =1700, container =1440
-            ratio =.847
-
-            vw =1800, container =1440
-            ratio =.8
-
-            vw =1920, container =1440
-            ratio =.75 */
-
         margin: 0 auto;
     }
 
     picture,
     .description {
         max-width: 480px;
-        /* min-width: 300px; */
     }
 
     .description {
@@ -455,7 +337,7 @@ main {
     }
 
     .login-navigation > li:last-child > a {
-        display: initial;  /* this way, the border goes wide, to the containing block */
+        display: initial;
     }
 
     .mobile-nav-toggle {
