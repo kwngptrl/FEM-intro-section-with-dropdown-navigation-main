@@ -59,6 +59,8 @@ In this challenge, I used a new pattern for the grid container which I derived f
 
 In mobile mode, I also fixed the issue where in some x-sized viewport, a vertical scrollbar appears and clicking on the hamburger icon shifts it a bit. The fix involves adding an additional utility class with JS detecting if ```window.innerWidth > document.body.clientWidth```. Also, a little transition to delay the appearance of the 'X' icon until the full deployment of the mobile menu was added in.
 
+UPDATE: I read up a bit on transitions in CSS, and it seems that I'm doing it wrong(?) However, it does seem to work the way I like it to, i.e., sliding in the menu then the 'X' appearing, then removing the 'X' and the menu disappearing afterwards. And while it does behave well in Chrome and an older version of Edge, in Firefox it works on the first try, but it works weirdly thereafter. I have yet to figure it out.
+
 As for the dropdown menus in the navbar, I read lots of articles on the proper implementation. I still don't know which is the best. The one I used is derived from [Fly-out Menus | Web Accessibility Initiative (WAI) | W3C](https://www.w3.org/WAI/tutorials/menus/flyout/). But in the example, there's only one dropdown. I had to figure out how to do two of them and I wanted to close one when I clicked on the other. I ended up using two nested forEach statements as shown below:
 
 ```
