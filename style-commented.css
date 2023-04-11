@@ -64,16 +64,18 @@ body {
 
 /* this is here to prevent the chevron from wrapping to another line when viewport is near 768px */
 .dropdown-toggle {
-    display: flex;
+    /* display: flex;
     flex-wrap: nowrap;
-    align-items: center;
-    
+    align-items: center; */
+    /*  this tip is from React Navbar Tutorial - Responsive Navbar in React JS (Advance)
+        https://youtu.be/q4mr71mFBr4?t=1965 */
+    white-space: nowrap;    
 }
 
 .arrow {
     /* regular color doesn't seem to have any effect */
     content: url('./images/icon-arrow-down.svg');
-    padding-inline-start: .3rem; 
+    /* padding-inline-start: .3rem; */ 
     vertical-align: middle;
     
     transition: transform 500ms ease-out;

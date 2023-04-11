@@ -55,15 +55,12 @@ body {
 }
 
 .dropdown-toggle {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
+    white-space: nowrap;
     
 }
 
 .arrow {
     content: url('./images/icon-arrow-down.svg');
-    padding-inline-start: .3rem; 
     vertical-align: middle;
     
     transition: transform 500ms ease-out;
